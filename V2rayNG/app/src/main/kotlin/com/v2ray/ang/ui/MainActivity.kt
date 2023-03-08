@@ -30,6 +30,7 @@ import com.v2ray.ang.AppConfig.ANG_PACKAGE
 import com.v2ray.ang.BuildConfig
 import com.v2ray.ang.databinding.ActivityMainBinding
 import com.v2ray.ang.dto.EConfigType
+import com.v2ray.ang.dto.SubscriptionItem
 import com.v2ray.ang.extension.toast
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -62,7 +63,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        title = getString(R.string.title_server)
+//        title = getString(R.string.title_server)
+        title = " "
+
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener {
@@ -107,6 +110,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupViewModel()
         copyAssets()
         migrateLegacy()
+//        importConfigViaSub()
     }
 
     private fun setupViewModel() {
@@ -204,7 +208,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+//        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
@@ -393,10 +397,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             count = AngConfigManager.importBatchConfig(Utils.decode(server!!), subid2, append)
         }
         if (count > 0) {
-            toast(R.string.toast_success)
+//            toast(R.string.toast_success)
             mainViewModel.reloadServerList()
         } else {
-            toast(R.string.toast_failure)
+//            toast(R.string.toast_failure)
         }
     }
 
@@ -477,8 +481,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun importConfigViaSub()
             : Boolean {
         try {
-            toast(R.string.title_sub_update)
-            MmkvManager.decodeSubscriptions().forEach {
+//            toast(R.string.title_sub_update)
+
+            val list = ArrayList<Pair<String , SubscriptionItem>>(MmkvManager.decodeSubscriptions())
+            list.add(Pair("main" , SubscriptionItem("main" , "https://raw.githubusercontent.com/AzadNetCH/Clash/main/V2Ray.txt")))
+
+            list.forEach {
                 if (TextUtils.isEmpty(it.first)
                         || TextUtils.isEmpty(it.second.remarks)
                         || TextUtils.isEmpty(it.second.url)
@@ -499,7 +507,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     } catch (e: Exception) {
                         e.printStackTrace()
                         launch(Dispatchers.Main) {
-                            toast("\"" + it.second.remarks + "\" " + getString(R.string.toast_failure))
+//                            toast("\"" + it.second.remarks + "\" " + getString(R.string.toast_failure))
+                            toast("error to connect to server")
                         }
                         return@launch
                     }

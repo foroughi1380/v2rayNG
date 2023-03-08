@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">v2rayNG</string>
+    <string name="app_name" translatable="false">Best VPN</string>
     <string name="app_widget_name">تعویض</string>
     <string name="app_tile_name">تعویض</string>
     <string name="app_tile_first_use">برای اولین بار از این ویژگی استفاده می‌کنید، لطفا از برنامه برای افزودن سرور استفاده کنید</string>
@@ -13,10 +13,10 @@
     <string name="notification_action_stop_v2ray">متوقف</string>
     <string name="toast_permission_denied">قادر به دریافت مجوز نیست</string>
     <string name="notification_action_more">برای اطلاعات بیشتر کلیک کنید</string>
-    <string name="toast_services_start">شروع خدمات</string>
-    <string name="toast_services_stop">توقف خدمات</string>
-    <string name="toast_services_success">خدمات با موفقیت شروع شد</string>
-    <string name="toast_services_failure">شروع خدمات انجام نشد</string>
+    <string name="toast_services_start">شروع اتصال</string>
+    <string name="toast_services_stop">توقف اتصال</string>
+    <string name="toast_services_success">با موفقیت وصل شد</string>
+    <string name="toast_services_failure">خطا در اتصال</string>
 
     <!--ServerActivity-->
     <string name="title_server">پرونده پیکربندی</string>
