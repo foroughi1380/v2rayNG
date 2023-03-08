@@ -79,14 +79,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 startV2Ray()
             }
         }
-        binding.layoutTest.setOnClickListener {
-            if (mainViewModel.isRunning.value == true) {
-                setTestState(getString(R.string.connection_test_testing))
-                mainViewModel.testCurrentServerRealPing()
-            } else {
-//                tv_test_state.text = getString(R.string.connection_test_fail)
-            }
-        }
+//        binding.layoutTest.setOnClickListener {
+//            if (mainViewModel.isRunning.value == true) {
+//                setTestState(getString(R.string.connection_test_testing))
+//                mainViewModel.testCurrentServerRealPing()
+//            } else {
+////                tv_test_state.text = getString(R.string.connection_test_fail)
+//            }
+//        }
 
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -97,10 +97,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         mItemTouchHelper?.attachToRecyclerView(binding.recyclerView)
 
 
-        val toggle = ActionBarDrawerToggle(
-                this, binding.drawerLayout, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+//        val toggle = ActionBarDrawerToggle(
+//                this, binding.drawerLayout, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+//        binding.drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)
         binding.version.text = "v${BuildConfig.VERSION_NAME} (${SpeedtestUtil.getLibVersion()})"
 
@@ -123,11 +123,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             if (isRunning) {
                 binding.fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorSelected))
                 setTestState(getString(R.string.connection_connected))
-                binding.layoutTest.isFocusable = true
+//                binding.layoutTest.isFocusable = true
             } else {
                 binding.fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorUnselected))
                 setTestState(getString(R.string.connection_not_connected))
-                binding.layoutTest.isFocusable = false
+//                binding.layoutTest.isFocusable = false
             }
             hideCircle()
         }
@@ -578,7 +578,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     fun setTestState(content: String?) {
-        binding.tvTestState.text = content
+//        binding.tvTestState.text = content
     }
 
 //    val mConnection = object : ServiceConnection {

@@ -65,90 +65,90 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
 
             holder.itemMainBinding.tvName.text = config.remarks
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
-            holder.itemMainBinding.tvTestResult.text = aff?.getTestDelayString() ?: ""
+//            holder.itemMainBinding.tvTestResult.text = aff?.getTestDelayString() ?: ""
             if ((aff?.testDelayMillis ?: 0L) < 0L) {
-                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPingRed))
+//                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPingRed))
             } else {
-                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPing))
+//                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPing))
             }
             if (guid == mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER)) {
-                holder.itemMainBinding.layoutIndicator.setBackgroundResource(R.color.colorSelected)
+                holder.itemMainBinding.infoContainer.setBackgroundResource(R.color.colorSelected)
             } else {
-                holder.itemMainBinding.layoutIndicator.setBackgroundResource(R.color.colorUnselected)
+                holder.itemMainBinding.infoContainer.setBackgroundResource(R.color.colorUnselected)
             }
-            holder.itemMainBinding.tvSubscription.text = ""
+//            holder.itemMainBinding.tvSubscription.text = ""
             val json = subStorage?.decodeString(config.subscriptionId)
             if (!json.isNullOrBlank()) {
                 val sub = Gson().fromJson(json, SubscriptionItem::class.java)
-                holder.itemMainBinding.tvSubscription.text = sub.remarks
+//                holder.itemMainBinding.tvSubscription.text = sub.remarks
             }
 
             var shareOptions = share_method.asList()
             when (config.configType) {
                 EConfigType.CUSTOM -> {
-                    holder.itemMainBinding.tvType.text = mActivity.getString(R.string.server_customize_config)
+//                    holder.itemMainBinding.tvType.text = mActivity.getString(R.string.server_customize_config)
                     shareOptions = shareOptions.takeLast(1)
                 }
                 EConfigType.VLESS -> {
-                    holder.itemMainBinding.tvType.text = config.configType.name
+//                    holder.itemMainBinding.tvType.text = config.configType.name
                 }
                 else -> {
-                    holder.itemMainBinding.tvType.text = config.configType.name.lowercase()
+//                    holder.itemMainBinding.tvType.text = config.configType.name.lowercase()
                 }
             }
-            holder.itemMainBinding.tvStatistics.text = "${outbound?.getServerAddress()} : ${outbound?.getServerPort()}"
+//            holder.itemMainBinding.tvStatistics.text = "${outbound?.getServerAddress()} : ${outbound?.getServerPort()}"
 
-            holder.itemMainBinding.layoutShare.setOnClickListener {
-                AlertDialog.Builder(mActivity).setItems(shareOptions.toTypedArray()) { _, i ->
-                    try {
-                        when (i) {
-                            0 -> {
-                                if (config.configType == EConfigType.CUSTOM) {
-                                    shareFullContent(guid)
-                                } else {
-                                    val ivBinding = ItemQrcodeBinding.inflate(LayoutInflater.from(mActivity))
-                                    ivBinding.ivQcode.setImageBitmap(AngConfigManager.share2QRCode(guid))
-                                    AlertDialog.Builder(mActivity).setView(ivBinding.root).show()
-                                }
-                            }
-                            1 -> {
-                                if (AngConfigManager.share2Clipboard(mActivity, guid) == 0) {
-                                    mActivity.toast(R.string.toast_success)
-                                } else {
-                                    mActivity.toast(R.string.toast_failure)
-                                }
-                            }
-                            2 -> shareFullContent(guid)
-                            else -> mActivity.toast("else")
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }.show()
-            }
-
-            holder.itemMainBinding.layoutEdit.setOnClickListener {
-                val intent = Intent().putExtra("guid", guid)
-                        .putExtra("isRunning", isRunning)
-                if (config.configType == EConfigType.CUSTOM) {
-                    mActivity.startActivity(intent.setClass(mActivity, ServerCustomConfigActivity::class.java))
-                } else {
-                    mActivity.startActivity(intent.setClass(mActivity, ServerActivity::class.java))
-                }
-            }
-            holder.itemMainBinding.layoutRemove.setOnClickListener {
-                if (guid != mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER)) {
-                    if (settingsStorage?.decodeBool(AppConfig.PREF_CONFIRM_REMOVE) == true) {
-                        AlertDialog.Builder(mActivity).setMessage(R.string.del_config_comfirm)
-                            .setPositiveButton(android.R.string.ok) { _, _ ->
-                                removeServer(guid, position)
-                            }
-                            .show()
-                    } else {
-                        removeServer(guid, position)
-                    }
-                }
-            }
+//            holder.itemMainBinding.layoutShare.setOnClickListener {
+//                AlertDialog.Builder(mActivity).setItems(shareOptions.toTypedArray()) { _, i ->
+//                    try {
+//                        when (i) {
+//                            0 -> {
+//                                if (config.configType == EConfigType.CUSTOM) {
+//                                    shareFullContent(guid)
+//                                } else {
+//                                    val ivBinding = ItemQrcodeBinding.inflate(LayoutInflater.from(mActivity))
+//                                    ivBinding.ivQcode.setImageBitmap(AngConfigManager.share2QRCode(guid))
+//                                    AlertDialog.Builder(mActivity).setView(ivBinding.root).show()
+//                                }
+//                            }
+//                            1 -> {
+//                                if (AngConfigManager.share2Clipboard(mActivity, guid) == 0) {
+//                                    mActivity.toast(R.string.toast_success)
+//                                } else {
+//                                    mActivity.toast(R.string.toast_failure)
+//                                }
+//                            }
+//                            2 -> shareFullContent(guid)
+//                            else -> mActivity.toast("else")
+//                        }
+//                    } catch (e: Exception) {
+//                        e.printStackTrace()
+//                    }
+//                }.show()
+//            }
+//
+//            holder.itemMainBinding.layoutEdit.setOnClickListener {
+//                val intent = Intent().putExtra("guid", guid)
+//                        .putExtra("isRunning", isRunning)
+//                if (config.configType == EConfigType.CUSTOM) {
+//                    mActivity.startActivity(intent.setClass(mActivity, ServerCustomConfigActivity::class.java))
+//                } else {
+//                    mActivity.startActivity(intent.setClass(mActivity, ServerActivity::class.java))
+//                }
+//            }
+//            holder.itemMainBinding.layoutRemove.setOnClickListener {
+//                if (guid != mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER)) {
+//                    if (settingsStorage?.decodeBool(AppConfig.PREF_CONFIRM_REMOVE) == true) {
+//                        AlertDialog.Builder(mActivity).setMessage(R.string.del_config_comfirm)
+//                            .setPositiveButton(android.R.string.ok) { _, _ ->
+//                                removeServer(guid, position)
+//                            }
+//                            .show()
+//                    } else {
+//                        removeServer(guid, position)
+//                    }
+//                }
+//            }
 
             holder.itemMainBinding.infoContainer.setOnClickListener {
                 val selected = mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER)
