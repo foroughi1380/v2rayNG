@@ -61,48 +61,66 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
+                    <FrameLayout
+                        android:id="@+id/frameLayout"
+                        android:layout_width="168dp"
+                        android:layout_height="152dp"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:foregroundGravity="center"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+
+                        <com.github.jorgecastilloprz.FABProgressCircle
+                            android:id="@+id/fabProgressCircle"
+                            android:layout_width="168dp"
+                            android:layout_height="151dp"
+                            android:layout_gravity="bottom|end"
+                            android:layout_marginTop="60dp">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/fab"
+                                android:layout_width="131dp"
+                                android:layout_height="131dp"
+                                android:layout_gravity="bottom|end"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:background="@color/white"
+                                android:clickable="true"
+                                android:fadingEdge="horizontal|vertical"
+                                android:focusable="true"
+                                android:nextFocusLeft="@+id/layout_test"
+                                app:layout_anchorGravity="bottom|right|end"
+                                app:maxImageSize="131dp" />
+
+                        </com.github.jorgecastilloprz.FABProgressCircle>
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_whatshot_white_24dp" />
+
+                    </FrameLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"
-                        android:layout_width="313dp"
-                        android:layout_height="377dp"
-                        android:layout_marginTop="52dp"
+                        android:layout_width="329dp"
+                        android:layout_height="454dp"
                         android:layout_weight="1"
                         android:nextFocusRight="@+id/fab"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.494"
+                        app:layout_constraintHorizontal_bias="0.48"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fabProgressCircle" />
+                        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
-                    <com.github.jorgecastilloprz.FABProgressCircle
-                        android:id="@+id/fabProgressCircle"
-                        android:layout_width="168dp"
-                        android:layout_height="151dp"
-                        android:layout_gravity="bottom|end"
-                        android:layout_marginTop="60dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                    </androidx.recyclerview.widget.RecyclerView>
 
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/fab"
-                            android:layout_width="131dp"
-                            android:layout_height="131dp"
-                            android:layout_gravity="bottom|end"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:background="@color/white"
-                            android:clickable="true"
-                            android:fadingEdge="horizontal|vertical"
-                            android:focusable="true"
-                            android:nextFocusLeft="@+id/layout_test"
-                            android:src="@drawable/ic_whatshot_white_24dp"
-                            app:layout_anchorGravity="bottom|right|end"
-                            app:maxImageSize="131dp" />
-
-                    </com.github.jorgecastilloprz.FABProgressCircle>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
