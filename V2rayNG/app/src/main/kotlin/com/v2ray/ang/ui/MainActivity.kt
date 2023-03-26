@@ -2,6 +2,7 @@ package com.v2ray.ang.ui
 
 import android.Manifest
 import android.content.*
+import android.content.ContentValues.TAG
 import android.net.Uri
 import android.net.VpnService
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.tencent.mmkv.MMKV
 import com.v2ray.ang.AppConfig.ANG_PACKAGE
 import com.v2ray.ang.BuildConfig
@@ -42,9 +47,14 @@ import kotlinx.coroutines.*
 import me.drakeet.support.toast.ToastCompat
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
+
+    private  var rewardedAd: RewardedAd? = null
+    private var  lastAdShowTime = 0L
 
     private val adapter by lazy { MainRecyclerAdapter(this) }
     private val mainStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_MAIN, MMKV.MULTI_PROCESS_MODE) }
@@ -106,10 +116,33 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.navView.setNavigationItemSelectedListener(this)
         binding.version.text = "v${BuildConfig.VERSION_NAME} (${SpeedtestUtil.getLibVersion()})"
 
+        initRewardAds()
         setupViewModel()
         copyAssets()
         migrateLegacy()
         importConfigViaSub()
+    }
+
+
+    private fun initRewardAds (){
+//        val testDeviceIds = Arrays.asList("33BE2250B43518CCDA7DE426D04EE231")
+//        val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
+//        MobileAds.setRequestConfiguration(configuration)
+
+        MobileAds.initialize(this)
+        val builder = AdRequest.Builder().build()
+        RewardedAd.load(this,getString(R.string.addmob_reward_id), builder , object : RewardedAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(TAG, adError?.toString())
+                rewardedAd = null
+            }
+
+            override fun onAdLoaded(ad: RewardedAd) {
+                Log.d(TAG, "Ad was loaded.")
+                rewardedAd = ad
+            }
+        })
+
     }
 
     private fun setupViewModel() {
@@ -180,6 +213,22 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         if (mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER).isNullOrEmpty()) {
             return
         }
+
+
+
+        val currentTime = System.currentTimeMillis()
+
+        if (currentTime - this.lastAdShowTime > 60_000 && this.rewardedAd != null) {
+            this.rewardedAd?.show(this) {
+                lastAdShowTime = System.currentTimeMillis();
+                withoutAdStart()
+            }
+        } else {
+            withoutAdStart()
+        }
+    }
+
+    fun withoutAdStart(){
         showCircle()
 //        toast(R.string.toast_services_start)
         V2RayServiceManager.startV2Ray(this)

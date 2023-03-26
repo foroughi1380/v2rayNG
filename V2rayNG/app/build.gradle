@@ -101,6 +101,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.13.2'
 
@@ -140,14 +141,14 @@ dependencies {
     implementation 'com.blacksquircle.ui:language-base:2.1.1'
     implementation 'com.blacksquircle.ui:language-json:2.1.1'
 
-    implementation 'com.google.android.gms:play-services-ads:21.5.0'
+
 }
 
-//buildscript {
-//    repositories {
+buildscript {
+    repositories {
 //        google()
 //        mavenCentral()
-//        maven { url 'https://maven.google.com' }
+      maven { url 'https://maven.google.com' }
 //        maven { url 'https://jitpack.io' }
-//    }
-//}
+    }
+}
