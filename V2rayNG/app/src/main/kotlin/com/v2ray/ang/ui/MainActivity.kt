@@ -26,7 +26,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.tencent.mmkv.MMKV
@@ -47,7 +46,6 @@ import kotlinx.coroutines.*
 import me.drakeet.support.toast.ToastCompat
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -213,9 +211,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         if (mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER).isNullOrEmpty()) {
             return
         }
-
-
-
         val currentTime = System.currentTimeMillis()
 
         if (currentTime - this.lastAdShowTime > 60_000 && this.rewardedAd != null) {
