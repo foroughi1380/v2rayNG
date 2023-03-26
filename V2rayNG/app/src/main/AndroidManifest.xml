@@ -26,7 +26,7 @@
     <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
 
     <application
-        android:name=".AngApplication"
+        android:name="com.v2ray.ang.AngApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,7 +36,7 @@
         tools:targetApi="m">
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.v2ray.ang.ui.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/AppThemeDayNight.NoActionBar">
@@ -53,51 +53,51 @@
         </activity>
         <activity
             android:exported="false"
-            android:name=".ui.ServerActivity"
+            android:name="com.v2ray.ang.ui.ServerActivity"
             android:windowSoftInputMode="stateUnchanged" />
         <activity
             android:exported="false"
-            android:name=".ui.ServerCustomConfigActivity"
+            android:name="com.v2ray.ang.ui.ServerCustomConfigActivity"
             android:windowSoftInputMode="stateUnchanged" />
         <activity
             android:exported="false"
-            android:name=".ui.SettingsActivity" />
+            android:name="com.v2ray.ang.ui.SettingsActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.PerAppProxyActivity" />
+            android:name="com.v2ray.ang.ui.PerAppProxyActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.ScannerActivity" />
+            android:name="com.v2ray.ang.ui.ScannerActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.LogcatActivity" />
+            android:name="com.v2ray.ang.ui.LogcatActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.RoutingSettingsActivity"
+            android:name="com.v2ray.ang.ui.RoutingSettingsActivity"
             android:windowSoftInputMode="stateUnchanged" />
         <activity
             android:exported="false"
-            android:name=".ui.SubSettingActivity" />
+            android:name="com.v2ray.ang.ui.SubSettingActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.UserAssetActivity" />
+            android:name="com.v2ray.ang.ui.UserAssetActivity" />
 
         <activity
             android:exported="false"
-            android:name=".ui.SubEditActivity" />
+            android:name="com.v2ray.ang.ui.SubEditActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.ScScannerActivity" />
+            android:name="com.v2ray.ang.ui.ScScannerActivity" />
         <activity
             android:exported="false"
-            android:name=".ui.ScSwitchActivity"
+            android:name="com.v2ray.ang.ui.ScSwitchActivity"
             android:excludeFromRecents="true"
             android:process=":RunSoLibV2RayDaemon"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
         <activity
             android:exported="true"
-            android:name=".ui.UrlSchemeActivity">
+            android:name="com.v2ray.ang.ui.UrlSchemeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -113,7 +113,7 @@
         </activity>
 
         <service
-            android:name=".service.V2RayVpnService"
+            android:name="com.v2ray.ang.service.V2RayVpnService"
             android:enabled="true"
             android:exported="false"
             android:label="@string/app_name"
@@ -127,20 +127,20 @@
                 android:value="true" />
         </service>
 
-        <service android:name=".service.V2RayProxyOnlyService"
+        <service android:name="com.v2ray.ang.service.V2RayProxyOnlyService"
                 android:exported="false"
                 android:label="@string/app_name"
                 android:process=":RunSoLibV2RayDaemon">
         </service>
 
-        <service android:name=".service.V2RayTestService"
+        <service android:name="com.v2ray.ang.service.V2RayTestService"
             android:exported="false"
             android:process=":RunSoLibV2RayDaemon">
         </service>
 
         <receiver
                 android:exported="true"
-                android:name=".receiver.WidgetProvider"
+                android:name="com.v2ray.ang.receiver.WidgetProvider"
                 android:process=":RunSoLibV2RayDaemon">
             <meta-data
                     android:name="android.appwidget.provider"
@@ -154,7 +154,7 @@
 
         <service
                 android:exported="true"
-                android:name=".service.QSTileService"
+                android:name="com.v2ray.ang.service.QSTileService"
                 android:icon="@drawable/ic_stat_name"
                 android:label="@string/app_tile_name"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -166,7 +166,7 @@
         <!-- =====================Tasker===================== -->
         <activity
             android:exported="true"
-            android:name=".ui.TaskerActivity"
+            android:name="com.v2ray.ang.ui.TaskerActivity"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name">
             <intent-filter>
@@ -176,13 +176,18 @@
 
         <receiver
             android:exported="true"
-            android:name=".receiver.TaskerReceiver"
+            android:name="com.v2ray.ang.receiver.TaskerReceiver"
                 android:process=":RunSoLibV2RayDaemon">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>
         </receiver>
         <!-- =====================Tasker===================== -->
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/addmob_app_id"/>
+
 
     </application>
 

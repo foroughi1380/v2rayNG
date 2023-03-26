@@ -17,7 +17,6 @@ import android.content.res.ColorStateList
 import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.ItemTouchHelper
 import android.util.Log
 import android.widget.Toast
@@ -110,7 +109,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupViewModel()
         copyAssets()
         migrateLegacy()
-//        importConfigViaSub()
+        importConfigViaSub()
     }
 
     private fun setupViewModel() {
@@ -484,7 +483,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //            toast(R.string.title_sub_update)
 
             val list = ArrayList<Pair<String , SubscriptionItem>>(MmkvManager.decodeSubscriptions())
-            list.add(Pair("main" , SubscriptionItem("main" , "https://raw.githubusercontent.com/AzadNetCH/Clash/main/V2Ray.txt")))
+            list.add(Pair("main" , SubscriptionItem("main" , "https://raw.githubusercontent.com/foroughi1380/v2rayNG/dev/V2rayNG/testServer")))
 
             list.forEach {
                 if (TextUtils.isEmpty(it.first)

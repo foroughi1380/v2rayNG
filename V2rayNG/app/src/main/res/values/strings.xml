@@ -228,4 +228,7 @@
         <item>Proxy only</item>
     </string-array>
 
+    <string name="addmob_app_id" translatable="false">ca-app-pub-2842699354968036~9532831318</string>
+    <string name="addmob_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+
 </resources>

@@ -1,19 +1,15 @@
 package com.v2ray.ang.ui
 
-import android.content.Intent
 import android.graphics.Color
 import android.text.TextUtils
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
 import com.v2ray.ang.AppConfig
 import com.v2ray.ang.R
-import com.v2ray.ang.databinding.ItemQrcodeBinding
 import com.v2ray.ang.databinding.ItemRecyclerFooterBinding
 import com.v2ray.ang.databinding.ItemRecyclerMainBinding
 import com.v2ray.ang.dto.EConfigType
